@@ -8,18 +8,36 @@ $dbObject = new PDO('mysql:host=localhost:3306;dbname=still;charset=utf8mb4','ro
 ]);
 
 require './Human.php';
+require  './Humans.php';
 
 /* Проверки и варианты использования класса Human */
-
 //$human = new Human(['name' => 'Vasia', 'surname'=>'Petrov', 'birthday' => '30.06.1992', 'gender' => 1, 'city' => 'Zhodino']);
-//$human = new Human(['name' => 'ВАСЯаленаvc', 'surname'=>'Petrov', 'birthday' => '30.06.1950', 'gender' => 0, 'city' => 'Zhodino1']);
-$human = new Human(['id'=>20]);
+//$human = new Human(['name' => 'ВАСЯGooD', 'surname'=>'Petrov', 'birthday' => '30.06.1950', 'gender' => 0, 'city' => 'Zhodino']);
+$human = new Human(['id'=>10]);
 
-echo Human::getFullYears($human->getBirthday());
+echo Human::getFullYears($human->getBirthday()).'<br>';
 
-echo Human::getGenderDefinition($human->getGender());
-
+echo Human::getGenderDefinition($human->getGender()).'<br>';
+echo $human.'<br>';
 $newHuman = $human->getRedactInstance(['birthday' =>'30.06.1994', 'gender' => 1]);
-echo $newHuman->getBirthdayToString();
+echo $newHuman->getBirthdayToString().'<br>';
 $newHuman->save();
+
+/*Проверки и варианты использования класса Humans*/
+/*EXPRESSION VALUES '>' '<' '!=' */
+$humans = new Humans('<', 5);
+
+echo "До удаления <br>";
+foreach ($humans->getHumans() as $everyHuman) {
+    echo $everyHuman.'<br>';
+}
+
+$humans->deleteHumans();
+
+echo "После удаления <br>";
+foreach ($humans->getHumans() as $everyHuman) {
+    echo $everyHuman.'<br>';
+}
+
+
 

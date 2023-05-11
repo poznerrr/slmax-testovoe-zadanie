@@ -86,7 +86,7 @@ class Human
 
     public function getBirthdayToString(): string
     {
-        return date('Y-m-d H:i:s', $this->getBirthday());
+        return date('Y-m-d', $this->getBirthday());
     }
 
     //Сохранение Полей Экземпляра Класса В Бд;
@@ -160,5 +160,10 @@ class Human
         } else {
             throw new Exception("Значение $field должно содержать только символы");
         }
+    }
+
+    public function __toString(): string
+    {
+        return "ID: {$this->id}, NAME: {$this->name}, SURNAME: {$this->surname}, BIRTH: {$this->getBirthdayToString()}, GENDER:".self::getGenderDefinition($this->gender).", CITY: {$this->city}";
     }
 }
